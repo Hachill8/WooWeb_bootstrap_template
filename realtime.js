@@ -8,10 +8,17 @@ $(document).ready(function () {
     Set_FourTitleText();
 });
 
-$(".nav-item").on("click", function() {
-    $(".nav-item").removeClass("active");
+$("#realtime_active").on("click", function () {
+    $("#record_active").removeClass("active");
+    $("#history").removeClass("active");
     $(this).addClass("active");
-  });
+});
+
+$("#record_active").on("click", function () {
+    $("#realtime_active").removeClass("active");
+    $("#history").removeClass("active");
+    $(this).addClass("active");
+});
 
 // function getData(pagename){
 //     const req = new XMLHttpRequest();
@@ -19,38 +26,38 @@ $(".nav-item").on("click", function() {
 //     req.onload=function(){
 //         var content = document.getElementById("switch_content");
 //         var element = document.createElement('script');
-        
+
 //         var src=pagename.split('.',1)+'.js'; 
 //         element.src=src;
 //         document.body.appendChild(element);
 //         content.innerHTML = this.responseText;
-        
+
 //     };
 //     req.send();
 // }
 
 function getData(pagename) {
     $.ajax({
-     url: "http://127.0.0.1:5500/"+pagename,	//上傳URL
-     type: "GET", //請求方式
-     success: function (data) {	//請求成功
-     console.log(data);
-     $("#switch_content").html(data);
-     var element = document.createElement('script');
-        
-        var src=pagename.split('.',1)+'.js'; 
-        element.src=src;
-        document.body.appendChild(element);
-     },
-     error: function () {
-     alert("出錯啦...");
-     },//表示如果請求響應出現錯誤，會執行的回調函數
+        url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
+        type: "GET", //請求方式
+        success: function (data) {	//請求成功
+            console.log(data);
+            $("#switch_content").html(data);
+            var element = document.createElement('script');
+
+            var src = pagename.split('.', 1) + '.js';
+            element.src = src;
+            document.body.appendChild(element);
+        },
+        error: function () {
+            alert("出錯啦...");
+        },//表示如果請求響應出現錯誤，會執行的回調函數
     });
-    }
+}
 
 
 function Set_cwblast24hours_ndhu_temperature() {
-    
+
     $.ajax({
         type: "GET",
         // contentType: "application/json; charset=utf-8",
@@ -129,7 +136,7 @@ function Set_cwblast24hours_ndhu_temperature() {
                             x = activePoint.tooltipPosition().x,
                             // topY = this.chart.legend.bottom,
                             topY = this.chart.chartArea.top;
-                            bottomY = this.chart.chartArea.bottom;
+                        bottomY = this.chart.chartArea.bottom;
                         ctx.save();
                         ctx.beginPath();
                         ctx.moveTo(x, topY);
@@ -141,7 +148,7 @@ function Set_cwblast24hours_ndhu_temperature() {
                     }
                 }
             });
-            
+
 
             // 初始化一个新的图
             var ndhu_cwb_linechart = new Chart(ctx, {
@@ -160,7 +167,7 @@ function Set_cwblast24hours_ndhu_temperature() {
 
                     //隱藏線的點
                     elements: {
-                        point:{
+                        point: {
                             radius: 0
                         }
                     },
@@ -207,7 +214,7 @@ function Set_cwblast24hours_ndhu_temperature() {
             });
             //每隔10分鐘重新執行一次(1秒=1000)
             setTimeout(Set_cwblast24hours_ndhu_temperature, 600000);
-            
+
         });
 }
 

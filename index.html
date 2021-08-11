@@ -12,7 +12,7 @@
     <!-- Logo圖片 -->
     <link rel="icon" type="image/png" href="img/greenhouse-effect.png" />
 
-    <title>VeryFarm</title>
+    <title>VeryFarmder</title>
 
     <!-- Chartjs lib -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
@@ -73,7 +73,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li id="realtime_active" class="nav-item active">
                 <a class="nav-link" href="index.html" onclick="getData('realtime.html');">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>即時天氣</span></a>
@@ -85,7 +85,7 @@
                     <span>歷史紀錄</span></a>
             </li>
 
-            <li class="nav-item">
+            <li id="record_active" class="nav-item">
                 <a class="nav-link" href="javascript:;" onclick="getData('record.html');">
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>生產履歷</span></a>
@@ -344,6 +344,8 @@
 
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
+
+        <!-- 即時資料、生產履歷 script -->
         <script src="realtime.js"></script>
         <script src="record.js"></script>
         <!-- Page level plugins -->
@@ -363,15 +365,15 @@
 
 
 
-        <!-- 其他 -->
-        <script language="JavaScript" src="mainpage.js" type="text/javascript" charset="UTF-8"></script>
-        
 
 
+
+        <!-- chartjs script -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
 
-
+        <!-- 其他 -->
+        <script language="JavaScript" src="mainpage.js" type="text/javascript" charset="UTF-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"
