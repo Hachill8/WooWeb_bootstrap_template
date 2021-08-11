@@ -1,0 +1,195 @@
+main {
+    padding-left: 142px;
+    padding-right: 142px;
+}
+ 
+.wrapper .page {
+    display: none;
+}
+ 
+.wrapper .page.is-active {
+    display: block;
+}
+
+.form-control:focus{border-color: #028A0f;  box-shadow: none; -webkit-box-shadow: none;} 
+.form-select:focus{border-color: #028A0f; } 
+.has-error .form-control:focus{box-shadow: none; -webkit-box-shadow: none;}
+.PillList-item {
+	cursor: pointer;
+	display: inline-block;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 18px;
+	margin: 0px 5px 5px;
+	text-transform: capitalize;
+}
+
+.PillList-item input[type="checkbox"] {
+	display: none;
+}
+.PillList-item input[type="checkbox"]:checked + .PillList-label {
+	background-color: #028A0f;
+	border: 1px solid #028A0f;
+	color: #fff;
+	padding-right: 14px;
+	padding-left: 14px;
+}
+.PillList-label {
+	border: 1px solid #028A0f;
+	border-radius: 20px;
+	color: #028A0f;
+	display: block;
+	padding: 3px 18px;
+	text-decoration: none;
+}
+.PillList-item
+	input[type="checkbox"]:checked
+	+ .PillList-label
+	.Icon--checkLight {
+	display: inline-block;
+}
+.PillList-item input[type="checkbox"]:checked + .PillList-label .Icon--addLight,
+.PillList-label .Icon--checkLight,
+.PillList-children {
+	display: none;
+}
+.PillList-label .Icon {
+	width: 8px;
+	height: 8px;
+	margin: 0 0 0 2px;
+}
+.Icon--smallest {
+	font-size: 12px;
+	line-height: 12px;
+}
+.Icon {
+	background: transparent;
+	display: inline-block;
+	font-style: normal;
+	vertical-align: baseline;
+	position: relative;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+	color: #fff;
+	border-color: #028A0f;
+	background-color: #028A0f;
+}
+.ontime {
+	margin-top: -100px;
+}
+
+.rounded-lg {
+	border-radius: 9rem;
+}
+
+.text-gray {
+	color: #aaa;
+}
+
+.div.h4 {
+	line-height: 1rem;
+}
+.btn-xl {
+	padding: 10px 20px;
+	font-size: 25px;
+	font-weight: bold;
+	border-radius: 10px;
+	width:30%;    
+}
+.datepicker-dropdown {
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    width:fit-content;
+}
+/*.datepicker {
+	z-index: 999999 !important;
+}*/
+.input-group {
+	border-radius: 5px;
+	padding-top: 0px;
+}
+
+/*.form-control {
+	border-color:  #aaa;
+}
+
+.form-control:focus {
+	box-shadow: none;
+}*/
+.input-group input {
+    border: 1px solid #d6d4d4;
+    border-radius: 5px;
+}
+.input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+    border-top-right-radius: 5px ;
+    border-bottom-right-radius: 5px;
+}
+
+.input-group input:focus {
+    box-shadow: none;
+    border: 1px solid #028A0f;
+}
+
+.input-group .fa-calendar-alt {
+    z-index: 999999 !important;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+/*.input-group-text {
+	/*border-radius: 0 30rem 30rem 0;
+	border: none;
+    background: none;
+}*/
+/*有關於日曆的樣式 */
+.datepicker table tr td.old, .datepicker table tr td.new {
+	color: #999;
+}
+.datepicker thead tr:first-child th:hover, .datepicker tbody tr td.day:hover, 
+.datepicker tbody tr td .month:hover, .datepicker tbody tr td .year:hover { /*table*/
+	background: #00a258;
+	color: #fff;
+}
+.datepicker tfoot th:hover {
+    background: #00a258;
+    color:#00a258;
+}
+.datepicker table tr td.active:active, .datepicker table tr td.active.highlighted:active, 
+.datepicker table tr td.active.active, .datepicker table tr td.active.highlighted.active,
+.datepicker table tr td span.month.active.active, .datepicker table tr td span.month.active.highlighted.active,
+.datepicker table tr td span.year.active.active, .datepicker table tr td span.year.active.highlighted.active {
+	background: green;
+}
+.datepicker table tr td span.month.focused, .datepicker table tr td span.month.focused.highlighted.active {
+    border-left: 2px solid #006700;
+    border-right: 2px solid #006700;
+    border-bottom: 2px solid #006700;
+    border-top: 2px solid #006700;
+}
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover {
+	background: none;
+	color: #ddd;
+}
+.multiselect-option.active {
+    color:#212529;
+    background: none;
+}
+.form-check-label {
+    margin-top: 8px;
+}
+.datepicker-container {
+    width: 15%;
+}
+.sensorresearch {
+    width: 15%;
+}
+.environmentresearch {
+    width: 20%;
+}
+.researchbutton {
+    width: 15%;
+}
+
+

@@ -1,0 +1,257 @@
+<div id="page-content-wraper" class="h-vh">
+    <div class="container bg-white p-3 mw-100" style="margin-top: 20px;">
+        <!-- <h4 class="mb-4">生產履歷</h4> -->
+        <div class="container-fluid ">
+            <ul class="nav nav-tabs mb-4">
+                <li class="nav-item">
+                    <a class="nav-link active" href="javascript:;"
+                        onclick="getData('record.html');">&nbsp;&nbsp;作物紀錄&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="javascript:;"
+                        onclick="getData('downloadfile.html');">檔案下載</a>
+                </li>
+            </ul>
+            <div class="col-md-2">
+                <button type="button" style="margin-bottom:5px;" class="btn btn-success" data-bs-toggle="modal"
+                    data-bs-target="#addrecordeModal">
+                    <i class="fas fa-plus"></i>
+                    新增紀錄
+                </button>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-12">
+                    <table id="dtable" class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>作業日期</th>
+                            <th>田區編號</th>
+                            <th>工作項目</th>
+                            <th>作業人員</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- add record modal -->
+<!-- Modal -->
+<div class="modal fade" id="addrecordeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">新增工作紀錄</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="saveRecordForm" action="javascript:void();" method="post">
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="workdate" class="col-sm-3 col-form-label">作業日期</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control pointer" placeholder="yyyy-mm-dd" id="workdate"
+                                name="workdate" style="border: 1px solid rgb(206, 212, 218);">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="areanum" class="col-sm-3 col-form-label">田區編號</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" aria-label="Default select example" id="areanum" name="areanum">
+ 
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="workitem" class="col-sm-3 col-form-label">工作項目</label>
+                        <div class="col-sm-9 ">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="整地" id="land_pre">
+                                <label class="form-check-label" for="land_pre">
+                                    整地
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="除草" id="weeding">
+                                <label class="form-check-label" for="weeding">
+                                    除草
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="採收" id="harvest">
+                                <label class="form-check-label" for="harvest">
+                                    採收
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="定植" id="planting">
+                                <label class="form-check-label" for="planting">
+                                    定植
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="施肥" id="fertilize">
+                                <label class="form-check-label" for="fertilize">
+                                    施肥
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="其他" id="other">
+                                <label class="form-check-label" for="other">
+                                    其他
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="播種" id="sowing">
+                                <label class="form-check-label" for="sowing">
+                                    播種
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="病蟲害防治" id="bug">
+                                <label class="form-check-label" for="bug">
+                                    病蟲害防治
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="workcontent" class="col-sm-3 col-form-label">內容</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="workcontent" class="form-control" id="workcontent">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="staff" class="col-sm-3 col-form-label">作業人員</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="staff" class="form-control" id="staff">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">送出</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- add record modal end -->
+ 
+<!-- edit record modal -->
+<!-- Modal -->
+<div class="modal fade" id="editrecordeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">更新工作紀錄</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <form id="updateRecordForm" action="javascript:void();" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="id" value="">
+                    <input type="hidden" id="trid" name="trid" value="">
+                    <div class="mb-3 row">
+                        <label for="workdate" class="col-sm-3 col-form-label">作業日期</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control pointer" placeholder="yyyy-mm-dd" id="_workdate"
+                                name="_workdate" style="border: 1px solid rgb(206, 212, 218);">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="areanum" class="col-sm-3 col-form-label">田區編號</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" aria-label="Default select example" id="_areanum"
+                                name="_areanum">
+ 
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="workitem" class="col-sm-3 col-form-label">工作項目</label>
+                        <div class="col-sm-9 ">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="整地" id="_land_pre">
+                                <label class="form-check-label" for="land_pre">
+                                    整地
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="除草" id="_weeding">
+                                <label class="form-check-label" for="weeding">
+                                    除草
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="採收" id="_harvest">
+                                <label class="form-check-label" for="harvest">
+                                    採收
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="定植" id="_planting">
+                                <label class="form-check-label" for="planting">
+                                    定植
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="施肥" id="_fertilize">
+                                <label class="form-check-label" for="fertilize">
+                                    施肥
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="其他" id="_other">
+                                <label class="form-check-label" for="other">
+                                    其他
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="播種" id="_sowing">
+                                <label class="form-check-label" for="sowing">
+                                    播種
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="病蟲害防治" id="_bug">
+                                <label class="form-check-label" for="bug">
+                                    病蟲害防治
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="workcontent" class="col-sm-3 col-form-label">內容</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="_workcontent" class="form-control" id="_workcontent">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="staff" class="col-sm-3 col-form-label">作業人員</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="_staff" class="form-control" id="_staff">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">送出</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ 
+<!-- edit record modal end -->
