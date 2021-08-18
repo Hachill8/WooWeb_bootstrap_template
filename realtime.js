@@ -315,7 +315,7 @@ function Set_cwblast24hours_ndhu_temperature() {
                 }
             });
             //每隔10分鐘重新執行一次(1秒=1000)
-            setTimeout(Set_cwblast24hours_ndhu_temperature, 60000);
+            setTimeout(Set_cwblast24hours_ndhu_temperature, 600000);
 
         });
 }
