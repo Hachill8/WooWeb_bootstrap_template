@@ -53,13 +53,13 @@
     <script src="vendor/jquery/jquery.js"></script>
 </head>
 
-<body id="page-top" onload="getData('realtime.html');">
+<body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -74,7 +74,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li id="realtime_active" class="nav-item active">
-                <a class="nav-link" href="index.html" onclick="getData('realtime.html');">
+                <a class="nav-link" href="javascript:;" onclick="getData('realtime.html');">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>即時天氣</span></a>
             </li>
@@ -217,7 +217,7 @@
                             <input type="text" class="form-control bg-light border-0 small" placeholder="搜尋..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-success" type="button">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -287,24 +287,136 @@
 
                 <!-- Begin Page Content -->
                 <div id='switch_content' class="container-fluid">
+                    <!-- Content Row -->
+                    <div class="row">
 
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
+                                                溫度</div>
+                                            <div id="tempid" class="h3 mb-0 font-weight-bold text-gray-800">28℃</div>
+                                            <div id="time1"
+                                                class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                更新時間：-</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-thermometer-half fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-success text-uppercase mb-1">
+                                                相對濕度</div>
+                                            <div id="humid" class="h3 mb-0 font-weight-bold text-gray-800">80％</div>
+                                            <div id="time2"
+                                                class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                更新時間：-</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-tint fa-2x text-gray-300"></i>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-info text-uppercase mb-1">
+                                                天氣</div>
+                                            <div id="weatherid" class="h3 mb-0 font-weight-bold text-gray-800">晴</div>
+                                            <div id="time3"
+                                                class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                更新時間：-</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <img id="img" src="img/day01.svg" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
+                                                土壤濕度</div>
+                                            <div class="h3 mb-0 font-weight-bold text-gray-800">-</div>
+                                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                更新時間：-</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-seedling fa-2x text-gray-300"></i>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+
+                        <!-- Area Chart -->
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">東華-過去24小時溫度</h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div style="height: 320px" class="chart-area">
+                                        <canvas id="ndhu_cwb_temperature_linechart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
 
                 </div>
                 <!-- End of Main Content -->
 
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
+
 
             </div>
             <!-- End of Content Wrapper -->
 
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>&copy; VeryFarm 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
         </div>
         <!-- End of Page Wrapper -->
 
@@ -314,7 +426,7 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -331,7 +443,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+
 
         <!-- Bootstrap core JavaScript-->
 
@@ -349,11 +463,11 @@
         <script src="realtime.js"></script>
         <script src="record.js"></script>
         <!-- Page level plugins -->
-        <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
         <!-- Page level custom scripts -->
-        <!-- <script src="js/demo/chart-area-demo.js"></script> -->
-        <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
+        <!-- <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script> -->
         <!-- record js lib -->
 
         <!-- <script type="text/javascript"
@@ -394,7 +508,18 @@
         <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 
+        <script type="text/javascript">
 
+            var useragent = navigator.userAgent;
+            useragent = useragent.toLowerCase();
+
+            if (useragent.indexOf('iphone') != -1 || useragent.indexOf('android') != -1) {
+                getData('record.html');
+                record_active();
+            }//iphone
+
+
+        </script>
 
 
 </body>
