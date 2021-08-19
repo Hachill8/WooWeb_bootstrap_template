@@ -6,6 +6,8 @@ $(document).ready(function () {
     //執行上方即時的溫度、相對溼度、天氣
     Set_FourTitleText();
 
+    //執行手機開啟會直接跳到生產履歷頁面
+    Mobile_device_go_record_page();
 });
 
 //左方導覽列按鈕切換-即時資料
@@ -22,7 +24,21 @@ $("#record_active").on("click", function () {
     $(this).addClass("active");
 });
 
-//當此網頁是用手機版開啟要直接跳到生產履歷頁面
+//從手機開啟會直接跳到生產履歷頁面
+function Mobile_device_go_record_page() {
+    
+    var useragent = navigator.userAgent;
+    useragent = useragent.toLowerCase();
+
+    if (useragent.indexOf('iphone') != -1 || useragent.indexOf('android') != -1) {
+        //切換頁面
+        getData('record.html');
+        //切換按鈕
+        record_active();
+    }
+}
+
+//當用手機版開啟時會從即時資料頁跳到生產履歷頁，因此按鈕也要做切換
 function record_active() {
     $("#realtime_active").removeClass("active");
     $("#history").removeClass("active");
@@ -35,8 +51,10 @@ function getData(pagename) {
         url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
         type: "GET", //請求方式
         success: function (data) {
+            //替換html內容
             $("#switch_content").html(data);
 
+            //加入此html會用到的js檔
             var element = document.createElement('script');
             var src = pagename.split('.', 1) + '.js';
             element.src = src;
@@ -49,7 +67,7 @@ function getData(pagename) {
     });
 }
 
-
+//執行東華過去24小時的溫度折線圖
 function Set_cwblast24hours_ndhu_temperature() {
 
     $.ajax({
@@ -116,9 +134,8 @@ function Set_cwblast24hours_ndhu_temperature() {
             });
 
             //丟掉原本的舊圖表，如果不destroy當刷新圖表時，原本的舊資料會閃爍地出現
-            if(ndhu_cwb_linechart != undefined) 
-            {
-                ndhu_cwb_linechart.destroy();
+            if (window.ndhu_cwb_linechart != undefined) {
+                window.ndhu_cwb_linechart.destroy();
             }
 
             // 获取所选canvas元素的内容
@@ -130,7 +147,7 @@ function Set_cwblast24hours_ndhu_temperature() {
 
 
             //---初始化一个新的图---
-            var ndhu_cwb_linechart = new Chart(ctx, {
+            window.ndhu_cwb_linechart = new Chart(ctx, {
                 type: 'LineWithLine',
                 //---设置图表的数据---
                 data: {
@@ -328,7 +345,7 @@ var updatetime2 = document.getElementById('time2');
 var updatetime3 = document.getElementById('time3');
 var weather_img = document.getElementById('img');
 
-
+//執行上方即時的溫度、相對溼度、天氣
 function Set_FourTitleText() {
     $.ajax({
         type: 'GET',

@@ -298,7 +298,7 @@
                                         <div class="col mr-2">
                                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
                                                 溫度</div>
-                                            <div id="tempid" class="h3 mb-0 font-weight-bold text-gray-800">28℃</div>
+                                            <div id="tempid" class="h3 mb-0 font-weight-bold text-gray-800">-</div>
                                             <div id="time1"
                                                 class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                                 更新時間：-</div>
@@ -319,7 +319,7 @@
                                         <div class="col mr-2">
                                             <div class="text-lg font-weight-bold text-success text-uppercase mb-1">
                                                 相對濕度</div>
-                                            <div id="humid" class="h3 mb-0 font-weight-bold text-gray-800">80％</div>
+                                            <div id="humid" class="h3 mb-0 font-weight-bold text-gray-800">-</div>
                                             <div id="time2"
                                                 class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                                 更新時間：-</div>
@@ -341,7 +341,7 @@
                                         <div class="col mr-2">
                                             <div class="text-lg font-weight-bold text-info text-uppercase mb-1">
                                                 天氣</div>
-                                            <div id="weatherid" class="h3 mb-0 font-weight-bold text-gray-800">晴</div>
+                                            <div id="weatherid" class="h3 mb-0 font-weight-bold text-gray-800">-</div>
                                             <div id="time3"
                                                 class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                                 更新時間：-</div>
@@ -507,19 +507,6 @@
             crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/charts/loader.js"></script>
 
-
-        <script type="text/javascript">
-
-            var useragent = navigator.userAgent;
-            useragent = useragent.toLowerCase();
-
-            if (useragent.indexOf('iphone') != -1 || useragent.indexOf('android') != -1) {
-                getData('record.html');
-                record_active();
-            }//iphone
-
-
-        </script>
 
 
 </body>
