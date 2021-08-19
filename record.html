@@ -1,6 +1,5 @@
 <div id="page-content-wraper" class="h-vh">
     <div class="container bg-white p-3 mw-100" style="margin-top: 20px;">
-        <!-- <h4 class="mb-4">生產履歷</h4> -->
         <div class="container-fluid ">
             <ul class="nav nav-tabs mb-4">
                 <li class="nav-item">
@@ -19,7 +18,7 @@
                     新增紀錄
                 </button>
             </div>
-
+            <!-- datatable -->
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-12">
@@ -67,7 +66,7 @@
                         <label for="areanum" class="col-sm-3 col-form-label">田區編號</label>
                         <div class="col-sm-9">
                             <select class="form-select" aria-label="Default select example" id="areanum" name="areanum">
- 
+
                                 <option value="C">C</option>
                             </select>
                         </div>
@@ -147,17 +146,17 @@
     </div>
 </div>
 <!-- add record modal end -->
- 
+
 <!-- edit record modal -->
 <!-- Modal -->
 <div class="modal fade" id="editrecordeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">更新工作紀錄</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
+
             <form id="updateRecordForm" action="javascript:void();" method="post">
                 <div class="modal-body">
                     <input type="hidden" id="id" name="id" value="">
@@ -174,7 +173,7 @@
                         <div class="col-sm-9">
                             <select class="form-select" aria-label="Default select example" id="_areanum"
                                 name="_areanum">
- 
+
                                 <option value="C">C</option>
                             </select>
                         </div>
@@ -207,7 +206,8 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="item[]" value="施肥" id="_fertilize">
+                                <input class="form-check-input" type="checkbox" name="item[]" value="施肥"
+                                    id="_fertilize">
                                 <label class="form-check-label" for="fertilize">
                                     施肥
                                 </label>
@@ -253,5 +253,4 @@
         </div>
     </div>
 </div>
- 
 <!-- edit record modal end -->
