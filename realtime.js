@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(function () {
 
     //執行東華過去24小時的溫度折線圖
     Set_cwblast24hours_ndhu_temperature();
@@ -6,8 +6,7 @@ $(document).ready(function () {
     //執行上方即時的溫度、相對溼度、天氣
     Set_FourTitleText();
 
-    //執行手機開啟會直接跳到生產履歷頁面
-    Mobile_device_go_record_page();
+    
 });
 
 //左方導覽列按鈕切換-即時資料
@@ -24,19 +23,6 @@ $("#record_active").on("click", function () {
     $(this).addClass("active");
 });
 
-//從手機開啟會直接跳到生產履歷頁面
-function Mobile_device_go_record_page() {
-    
-    var useragent = navigator.userAgent;
-    useragent = useragent.toLowerCase();
-
-    if (useragent.indexOf('iphone') != -1 || useragent.indexOf('android') != -1) {
-        //切換頁面
-        getData('record.html');
-        //切換按鈕
-        record_active();
-    }
-}
 
 //當用手機版開啟時會從即時資料頁跳到生產履歷頁，因此按鈕也要做切換
 function record_active() {
@@ -44,6 +30,8 @@ function record_active() {
     $("#history").removeClass("active");
     $("#record_active").addClass("active");
 }
+
+
 
 //以AJAX方式針對指定內容做更新，不用重整網頁
 function getData(pagename) {
@@ -53,7 +41,7 @@ function getData(pagename) {
         success: function (data) {
             //替換html內容
             $("#switch_content").html(data);
-
+            
             //加入此html會用到的js檔
             var element = document.createElement('script');
             var src = pagename.split('.', 1) + '.js';
@@ -62,10 +50,11 @@ function getData(pagename) {
 
         }, //請求成功
         error: function () {
-            alert("AJAX換頁初四了!");
+            alert("AJAX換頁發生錯誤!");
         },//表示如果請求響應出現錯誤，會執行的回調函數
     });
 }
+
 
 //執行東華過去24小時的溫度折線圖
 function Set_cwblast24hours_ndhu_temperature() {
@@ -77,12 +66,12 @@ function Set_cwblast24hours_ndhu_temperature() {
         dataType: 'json'
 
     })
-        .fail(function (jqXHR, textStatus, errorThrown) { alert("圖表初四了!"); })
+        .fail(function (jqXHR, textStatus, errorThrown) { alert("溫度折線圖發生錯誤!"); })
         .done(function (results) {
             // console.log(results);
 
             var last24hours = [], Temperature_data = [];
-            // var Relative_humidity_data = [];
+           
 
             //---將"時間"儲存為一個陣列---
             for (let i = results.length - 1; i >= 0; i--) {
@@ -105,8 +94,6 @@ function Set_cwblast24hours_ndhu_temperature() {
                 Temperature_data.push(results[i].Temperature);
 
             }
-            // console.log(last24hours);
-            // console.log(Temperature_data);
 
 
             //根據滑鼠停留圖表的位置，會顯示Y軸的線，線會對應X軸上的值
@@ -331,8 +318,8 @@ function Set_cwblast24hours_ndhu_temperature() {
                     }
                 }
             });
-            //每隔10分鐘重新執行一次(1秒=1000)
-            setTimeout(Set_cwblast24hours_ndhu_temperature, 600000);
+            //每隔5分鐘重新執行一次(1秒=1000)
+            setTimeout(Set_cwblast24hours_ndhu_temperature, 300000);
 
         });
 }
@@ -354,9 +341,9 @@ function Set_FourTitleText() {
         dataType: 'json'
 
     })
-        .fail(function (jqXHR, textStatus, errorThrown) { alert("四個格子初四了!"); })
+        .fail(function (jqXHR, textStatus, errorThrown) { alert("溫度、相對溼度、天氣發生錯誤!"); })
         .done(function (results) {
-            console.log(results);
+            // console.log(results);
 
             var Timedata = [], Tdata = [], Hdata = [], Wdata = [], Wimgdata = [];
 
@@ -390,6 +377,12 @@ function Set_FourTitleText() {
             else if (Wimgdata[0] == "day/14.svg") {
                 weather_img.src = 'img/day14.svg';
             }
+            else if (Wimgdata[0] == "day/18.svg") {
+                weather_img.src = 'img/day18.svg';
+            }
+            else if (Wimgdata[0] == "day/34.svg") {
+                weather_img.src = 'img/day34.svg';
+            }
             else {
                 weather_img.src = 'img/dayandnight07.svg';
             }
@@ -398,7 +391,7 @@ function Set_FourTitleText() {
             updatetime3.textContent = "更新時間 : " + Timedata[0];
 
             //每隔10分鐘重新執行一次(1秒=1000)
-            setTimeout(Set_FourTitleText, 600000);
+            setTimeout(Set_FourTitleText, 300000);
         });
 }
 

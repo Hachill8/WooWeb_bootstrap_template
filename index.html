@@ -12,7 +12,7 @@
     <!-- Logo圖片 -->
     <link rel="icon" type="image/png" href="img/greenhouse-effect.png" />
 
-    <title>VeryFarmder</title>
+    <title>VeryFarm</title>
 
     <!-- Chartjs lib -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
@@ -50,7 +50,30 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-    <script src="vendor/jquery/jquery.js"></script>
+
+    <script>
+        //以AJAX方式針對指定內容做更新，不用重整網頁
+        function getData(pagename) {
+            $.ajax({
+                url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
+                type: "GET", //請求方式
+                success: function (data) {
+                    //替換html內容
+                    $("#switch_content").html(data);
+
+                    //加入此html會用到的js檔
+                    // var element = document.createElement('script');
+                    // var src = pagename.split('.', 1) + '.js';
+                    // element.src = src;
+                    // document.body.appendChild(element);
+
+                }, //請求成功
+                error: function () {
+                    alert("AJAX換頁發生錯誤!");
+                },//表示如果請求響應出現錯誤，會執行的回調函數
+            });
+        }
+    </script>
 </head>
 
 <body id="page-top">
@@ -445,32 +468,115 @@
             </div>
         </div> -->
 
+        <!--history start-->
+        <div class="form-content" style="display:none;">
+            <a class="searcha" href="history.html"></a>
+            <form class="needs-validation" novalidate name='form1' id='form1'>
+                <h5 class="mb-0"><strong>感測器</strong></h5>
+                <div class="row mt-2">
+                    <div class="col-md-12">
+
+                        <label class="PillList-item">
+                            <input type="checkbox" name="feature" value="temperature">
+                            <span class="PillList-label">溫度
+                                <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
+                            </span>
+                        </label>
+
+                        <label class="PillList-item">
+                            <input type="checkbox" name="feature" value="humidity">
+                            <span class="PillList-label">濕度
+                                <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+                <h5 class="mb-0 mt-3"><strong>日期</strong></h5>
+                <div class="row mt-2">
+                    <div class="col-xs-12 col-sm-6" id="datepicker1">
+                        <div class="datepicker date input-group">
+                            <input type="text" class="form-control datepicker1" name="date1" id="Date1"
+                                placeholder="開始日期" autocomplete="off">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6" id="datepicker2">
+                        <div class="datepicker date input-group">
+                            <input type="text" class="form-control datepicker2" name="date2" id="Date2"
+                                placeholder="結束日期" autocomplete="off">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="mb-0 mt-3"><strong>裝置</strong></h5>
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <label class="PillList-item">
+                            <input type="checkbox" name="environment" value="1">
+                            <span class="PillList-label">氣象站
+                                <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
+                            </span>
+                        </label>
+
+                        <label class="PillList-item">
+                            <input type="checkbox" name="environment" value="2">
+                            <span class="PillList-label">棚內
+                                <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
+                            </span>
+                        </label>
+
+                        <label class="PillList-item">
+                            <input type="checkbox" name="environment" value="3">
+                            <span class="PillList-label">室外
+                                <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <h5 class="mb-0 mt-3"><strong>棚架</strong></h5>
+                <div class="form-group">
+                    <select class="form-select mt-2" id="scaffoldselect" onChange="scaffoldfunction(this);">
+                        <option value="A1">A區1</option>
+                        <option value="A2">A區2</option>
+                        <option value="A3">A區3</option>
+                        <option value="A4">A區4</option>
+                        <option value="A5">A區5</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <!--history end-->
 
 
-        <!-- Bootstrap core JavaScript-->
 
-        <script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- 即時資料、生產履歷 script -->
-        <script src="realtime.js"></script>
-        <script src="record.js"></script>
-        <!-- Page level plugins -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- 即時資料、生產履歷 script -->
+    <script src="realtime.js"></script>
+    <script src="record.js"></script>
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <!-- <script src="js/demo/chart-area-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <!-- <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script> -->
-        <!-- record js lib -->
+    <!-- record js lib -->
 
-        <!-- <script type="text/javascript"
+    <!-- <script type="text/javascript"
             src="https://cdn.datatables.net/v/bs5/jq-3.3.1/dt-1.10.25/datatables.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -482,115 +588,46 @@
 
 
 
-        <!-- chartjs script -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <!-- chartjs script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
 
-        <!-- 其他 -->
-        <script language="JavaScript" src="mainpage.js" type="text/javascript" charset="UTF-8"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha512-n6dYFOG599s4/mGlA6E+YLgtg9uPTOMDUb0IprSMDYVLr0ctiRryPEQ8gpM4DCMlx7M2G3CK+ZcaoOoJolzdCg=="
-            crossorigin="anonymous"></script>
+    <!-- 其他 -->
+    <script language="JavaScript" src="mainpage.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha512-n6dYFOG599s4/mGlA6E+YLgtg9uPTOMDUb0IprSMDYVLr0ctiRryPEQ8gpM4DCMlx7M2G3CK+ZcaoOoJolzdCg=="
+        crossorigin="anonymous"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-            crossorigin="anonymous"></script>
-
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-            integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-            crossorigin="anonymous"></script>
-        <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+        crossorigin="anonymous"></script>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
+
+    <script>
+        //從手機開啟會直接跳到生產履歷頁面
+        var useragent = navigator.userAgent;
+        useragent = useragent.toLowerCase();
+
+        if (useragent.indexOf('iphone') != -1 || useragent.indexOf('android') != -1) {
+            //切換頁面
+            getData('record.html');
+            //切換按鈕
+            record_active();
+        }
+    </script>
 </body>
 
-<!--history start-->
-<div class="form-content" style="display:none;">
-    <a class="searcha" href="history.html"></a>
-    <form class="needs-validation" novalidate name='form1' id='form1'>
-        <h5 class="mb-0"><strong>感測器</strong></h5>
-        <div class="row mt-2">
-            <div class="col-md-12">
 
-                <label class="PillList-item">
-                    <input type="checkbox" name="feature" value="temperature">
-                    <span class="PillList-label">溫度
-                        <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
-                    </span>
-                </label>
-
-                <label class="PillList-item">
-                    <input type="checkbox" name="feature" value="humidity">
-                    <span class="PillList-label">濕度
-                        <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
-                    </span>
-                </label>
-
-            </div>
-        </div>
-        <h5 class="mb-0 mt-3"><strong>日期</strong></h5>
-        <div class="row mt-2">
-            <div class="col-xs-12 col-sm-6" id="datepicker1">
-                <div class="datepicker date input-group">
-                    <input type="text" class="form-control datepicker1" name="date1" id="Date1" placeholder="開始日期"
-                        autocomplete="off">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-6" id="datepicker2">
-                <div class="datepicker date input-group">
-                    <input type="text" class="form-control datepicker2" name="date2" id="Date2" placeholder="結束日期"
-                        autocomplete="off">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-            </div>
-        </div>
-        <h5 class="mb-0 mt-3"><strong>裝置</strong></h5>
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <label class="PillList-item">
-                    <input type="checkbox" name="environment" value="1">
-                    <span class="PillList-label">氣象站
-                        <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
-                    </span>
-                </label>
-
-                <label class="PillList-item">
-                    <input type="checkbox" name="environment" value="2">
-                    <span class="PillList-label">棚內
-                        <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
-                    </span>
-                </label>
-
-                <label class="PillList-item">
-                    <input type="checkbox" name="environment" value="3">
-                    <span class="PillList-label">室外
-                        <span class="Icon Icon--checkLight Icon--smallest"><i class="fa fa-check"></i></span>
-                    </span>
-                </label>
-            </div>
-        </div>
-        <h5 class="mb-0 mt-3"><strong>棚架</strong></h5>
-        <div class="form-group">
-            <select class="form-select mt-2" id="scaffoldselect" onChange="scaffoldfunction(this);">
-                <option value="A1">A區1</option>
-                <option value="A2">A區2</option>
-                <option value="A3">A區3</option>
-                <option value="A4">A區4</option>
-                <option value="A5">A區5</option>
-            </select>
-        </div>
-    </form>
-</div>
-</div>
-<!--history end-->
 
 </html>

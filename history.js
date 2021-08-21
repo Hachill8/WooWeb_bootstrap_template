@@ -421,24 +421,28 @@ function submithistory() {/*重新查詢button按下後用新的href先重新載
 
 
 
-function getData(pagename) {
-	$.ajax({
-		url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
-		type: "GET", //請求方式
-		success: function (data) {	//請求成功
-			console.log(data);
-			$("#switch_content").html(data);
-			var element = document.createElement('script');
+//以AJAX方式針對指定內容做更新，不用重整網頁
+function getData2(pagename) {
+    $.ajax({
+        url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
+        type: "GET", //請求方式
+        success: function (data) {
+            //替換html內容
+            $("#switch_content2").html(data);
+            
+            //加入此html會用到的js檔
+            var element = document.createElement('script');
+            var src = pagename.split('.', 1) + '.js';
+            element.src = src;
+            document.body.appendChild(element);
 
-			var src = pagename.split('.', 1) + '.js';
-			element.src = src;
-			document.body.appendChild(element);
-		},
-		error: function () {
-			alert("出錯啦...");
-		},//表示如果請求響應出現錯誤，會執行的回調函數
-	});
+        }, //請求成功
+        error: function () {
+            alert("AJAX換頁發生錯誤!");
+        },//表示如果請求響應出現錯誤，會執行的回調函數
+    });
 }
+
 $("#realtime_active").on("click", function () {
 	$("#record_active").removeClass("active");
 	$("#history").removeClass("active");
