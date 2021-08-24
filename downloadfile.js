@@ -9,11 +9,12 @@ $('#datatable').DataTable({
 });
 
 $(document).on('submit', '#searchpdf', function (event) { //送出資料搜尋
-
+    event.preventDefault();
     var id = $('#id').val();;
     var start = $('#startdate').val();
     var end = $('#enddate').val();
     var area = $('#search_areanum').val();
+
     var table = $('#datatable').DataTable();
 
 
@@ -31,6 +32,7 @@ $(document).on('submit', '#searchpdf', function (event) { //送出資料搜尋
             var rdata = [id = i + 1, start, end, area, is[i], button];
             //console.log('123');
             tablerow.add(rdata).draw();//指定row的資料內容
+            
 
         }
         //$('#startdate').val('');
@@ -38,7 +40,7 @@ $(document).on('submit', '#searchpdf', function (event) { //送出資料搜尋
         //$('#search_areanum').val('');
         $('#worksheet').prop('checked', false);
         $('#shipmentsheet').prop('checked', false);
-
+        
 
     }
     else {
@@ -47,7 +49,8 @@ $(document).on('submit', '#searchpdf', function (event) { //送出資料搜尋
 
 });
 
-$('#datatable tbody').on('click', '.pdfBtn', function () { //下載檔案
+$('#datatable tbody').on('click', '.pdfBtn', function (e) { //下載檔案
+    
     var start = $('#startdate').val();
     var end = $('#enddate').val();
     var area = $('#search_areanum').val();

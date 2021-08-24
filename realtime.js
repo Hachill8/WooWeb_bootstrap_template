@@ -1,12 +1,10 @@
 jQuery(function () {
 
     //執行東華過去24小時的溫度折線圖
-    Set_cwblast24hours_ndhu_temperature();
+    Set_cwbLatest24hours_ndhu_temperature();
 
     //執行上方即時的溫度、相對溼度、天氣
     Set_FourTitleText();
-
-    
 });
 
 //左方導覽列按鈕切換-即時資料
@@ -23,15 +21,12 @@ $("#record_active").on("click", function () {
     $(this).addClass("active");
 });
 
-
 //當用手機版開啟時會從即時資料頁跳到生產履歷頁，因此按鈕也要做切換
 function record_active() {
     $("#realtime_active").removeClass("active");
     $("#history").removeClass("active");
     $("#record_active").addClass("active");
 }
-
-
 
 //以AJAX方式針對指定內容做更新，不用重整網頁
 function getData(pagename) {
@@ -41,7 +36,7 @@ function getData(pagename) {
         success: function (data) {
             //替換html內容
             $("#switch_content").html(data);
-            
+
             //加入此html會用到的js檔
             var element = document.createElement('script');
             var src = pagename.split('.', 1) + '.js';
@@ -57,43 +52,39 @@ function getData(pagename) {
 
 
 //執行東華過去24小時的溫度折線圖
-function Set_cwblast24hours_ndhu_temperature() {
+function Set_cwbLatest24hours_ndhu_temperature() {
 
     $.ajax({
         type: "GET",
         // contentType: "application/json; charset=utf-8",
         url: 'http://134.208.97.191:8080/JSON_WebService.asmx/NDHU_24hr',
         dataType: 'json'
-
     })
         .fail(function (jqXHR, textStatus, errorThrown) { alert("溫度折線圖發生錯誤!"); })
         .done(function (results) {
             // console.log(results);
-
-            var last24hours = [], Temperature_data = [];
-           
+            var Latest24hours = [], Temperature_data = [],max_min_Temperature = [];
 
             //---將"時間"儲存為一個陣列---
             for (let i = results.length - 1; i >= 0; i--) {
-
-                //---X軸時間簡化，如果每個都顯示日期太冗長---因為找到更好的寫法，以下這幾行就不用了，留著是為了可以比較前後寫法差異
-                //X軸的第一個時間和00:00的時間前面要顯示日期，23 - (24 - parseInt(results[23].DataTime.substring(6, 8) =>找出今日00:00的位置)
-                // if (i == 23 || i == parseInt(results[23].DataTime.substring(6, 8) - 1)) {
-                // last24hours.push(results[i].DataTime);
-                // }
-                // else {
-                //     last24hours.push(results[i].DataTime.substring(6, 11));
-                // }
-
-                last24hours.push(results[i].DataTime);
+                Latest24hours.push(results[i].DataTime);
             }
-
+            console.log(Latest24hours);
             //---將"溫度"儲存為一個陣列---
             for (let i = results.length - 1; i >= 0; i--) {
-
-                Temperature_data.push(results[i].Temperature);
-
+                //如果溫度值為"-"表示有缺值，要補上null
+                if(results[i].Temperature=="-"){
+                    Temperature_data.push(null);
+                }
+                else{
+                    Temperature_data.push(results[i].Temperature);
+                    //另外建一個沒有存null值的max_min_Temperature陣列，用來設定Y軸的max和min(在yAxes的ticks裡)，
+                    //如果用Temperature_data來設定，假設Temperature_data=[25.3,26.1,null,24]
+                    //當Math.min.apply在找最小值時，碰到null會回傳0，此時min:0，但真正最小值為24度，會導致折線圖下方的空隙很大
+                    max_min_Temperature.push(results[i].Temperature);
+                }
             }
+            console.log(Temperature_data);
 
 
             //根據滑鼠停留圖表的位置，會顯示Y軸的線，線會對應X軸上的值
@@ -139,7 +130,7 @@ function Set_cwblast24hours_ndhu_temperature() {
                 //---设置图表的数据---
                 data: {
                     //★★★--labels放入"時間"陣列
-                    labels: last24hours,
+                    labels: Latest24hours,
                     datasets: [{
 
                         label: "東華溫度",
@@ -152,7 +143,7 @@ function Set_cwblast24hours_ndhu_temperature() {
                         //线条宽度
                         borderWidth: 2,
                         //贝塞尔曲线 值为0时为折线图
-                        lineTension: 0.3,
+                        lineTension: 0.2,
                         //线下填充色
                         //backgroundColor: "rgba(78, 115, 223, 0.05)",
                         //线条颜色
@@ -173,6 +164,8 @@ function Set_cwblast24hours_ndhu_temperature() {
 
                 options: {
 
+                    //如果遇到溫度為null值，原本的線會斷掉，此設定是將null值前後的值連接，讓曲線圖是完整一條線
+                    spanGaps: true,
                     //---標題設定---
                     title: {
                         display: true,
@@ -255,7 +248,7 @@ function Set_cwblast24hours_ndhu_temperature() {
 
                                     callback: function (label) {
                                         //顯示時間，原本label的值為xx/xx xx:xx
-                                        //label.substring(6, 12)只取後面的時間
+                                        //label.substring(6, 12)只取後面的時間，變成xx:xx
 
                                         return label.substring(6, 12);
 
@@ -280,8 +273,8 @@ function Set_cwblast24hours_ndhu_temperature() {
                                     fontColor: "rgba(78, 115, 223, 1)",
                                     callback: function (label, index, labels) {
                                         //顯示日期，原本label的值為xx/xx xx:xx
-                                        //第一個時間和00:00此兩個時間才顯示日期，其他則不顯示
-                                        if (label.length > 5 && index == 0 || label.substring(6, 12) == "00:00") {
+                                        //第一個時間和00:00此兩個時間才顯示日期，變成xx/xx，其他則不顯示
+                                        if (index == 0 || label.substring(6, 12) == "00:00") {
                                             return label.substring(0, 6);
                                         }
                                         else {
@@ -292,7 +285,8 @@ function Set_cwblast24hours_ndhu_temperature() {
                                 }
 
 
-                            }],
+                            }
+                        ],
                         yAxes: [{
                             id: "y-Temp",
                             position: 'left',
@@ -310,8 +304,8 @@ function Set_cwblast24hours_ndhu_temperature() {
                             },
                             ticks: {
 
-                                min: Math.floor(Math.min.apply(this, Temperature_data)) - 1, //最小值
-                                max: Math.ceil(Math.max.apply(this, Temperature_data)) + 1, //最大值
+                                min: Math.floor(Math.min.apply(this, max_min_Temperature)) - 1, //最小值
+                                max: Math.ceil(Math.max.apply(this, max_min_Temperature)) + 1, //最大值
                                 stepSize: 1 //值與值的間隔
                             },
                         }]
@@ -319,76 +313,55 @@ function Set_cwblast24hours_ndhu_temperature() {
                 }
             });
             //每隔5分鐘重新執行一次(1秒=1000)
-            setTimeout(Set_cwblast24hours_ndhu_temperature, 300000);
+            setTimeout(Set_cwbLatest24hours_ndhu_temperature, 300000);
 
         });
 }
 
-var temp_text = document.getElementById('tempid');
-var hum_text = document.getElementById('humid');
-var weather_text = document.getElementById('weatherid');
-var updatetime1 = document.getElementById('time1');
-var updatetime2 = document.getElementById('time2');
-var updatetime3 = document.getElementById('time3');
-var weather_img = document.getElementById('img');
+
 
 //執行上方即時的溫度、相對溼度、天氣
 function Set_FourTitleText() {
     $.ajax({
         type: 'GET',
-        // contentType: "application/json; charset=utf-8",
-        url: 'http://134.208.97.191:8080/JSON_WebService.asmx/Hualien_24hr',
+        url: 'http://134.208.97.191:8080/JSON_WebService.asmx/Hualien_latest',
         dataType: 'json'
 
     })
         .fail(function (jqXHR, textStatus, errorThrown) { alert("溫度、相對溼度、天氣發生錯誤!"); })
         .done(function (results) {
             // console.log(results);
+            var temp_text = document.getElementById('tempid');
+            var hum_text = document.getElementById('humid');
+            var weather_text = document.getElementById('weatherid');
+            var updatetime1 = document.getElementById('time1');
+            var updatetime2 = document.getElementById('time2');
+            var updatetime3 = document.getElementById('time3');
+            var weather_img = document.getElementById('img');
 
-            var Timedata = [], Tdata = [], Hdata = [], Wdata = [], Wimgdata = [];
+            var weather_number;
+            
+            temp_text.textContent = results[0].Temperature + "℃";
+            hum_text.textContent = results[0].Humidity + "%";
+            weather_text.textContent = results[0].Weather;
+            updatetime1.textContent = "更新時間 : " + results[0].DataTime;
+            updatetime2.textContent = "更新時間 : " + results[0].DataTime;
+            updatetime3.textContent = "更新時間 : " + results[0].DataTime;
 
-            Timedata.push(results[0].DataTime);
-            Tdata.push(results[0].Temperature);
-            Hdata.push(results[0].Humidity);
-            Wdata.push(results[0].Weather);
-            Wimgdata.push(results[0].Weather_img);
+            if (results[0].Weather_img.substring(0, 3) == "day") {
+                weather_number = results[0].Weather_img.slice(4);
+                weather_img.src = 'img/day' + weather_number;
 
-            temp_text.textContent = Tdata[0] + "℃";
-            hum_text.textContent = Hdata[0] + "%";
-            weather_text.textContent = Wdata[0];
-            if (Wimgdata[0] == "day/01.svg") {
-                weather_img.src = 'img/day01.svg';
             }
-            else if (Wimgdata[0] == "day/04.svg") {
-                weather_img.src = 'img/day04.svg';
-            }
-            else if (Wimgdata[0] == "night/01.svg") {
-                weather_img.src = 'img/night01.svg';
-            }
-            else if (Wimgdata[0] == "night/04.svg") {
-                weather_img.src = 'img/night04.svg';
-            }
-            else if (Wimgdata[0] == "night/08.svg") {
-                weather_img.src = 'img/night08.svg';
-            }
-            else if (Wimgdata[0] == "night/28.svg") {
-                weather_img.src = 'img/night28.svg';
-            }
-            else if (Wimgdata[0] == "day/14.svg") {
-                weather_img.src = 'img/day14.svg';
-            }
-            else if (Wimgdata[0] == "day/18.svg") {
-                weather_img.src = 'img/day18.svg';
-            }
-            else if (Wimgdata[0] == "day/34.svg") {
-                weather_img.src = 'img/day34.svg';
+            else if (results[0].Weather_img.substring(0, 5) == "night") {
+                weather_number = results[0].Weather_img.slice(6);
+                weather_img.src = 'img/night' + weather_number;
+
             }
             else {
-                weather_img.src = 'img/dayandnight07.svg';
+                weather_img.src = 'img/nopicture.svg';
             }
-            updatetime1.textContent = "更新時間 : " + Timedata[0];
-            updatetime2.textContent = "更新時間 : " + Timedata[0];
-            updatetime3.textContent = "更新時間 : " + Timedata[0];
+            
 
             //每隔10分鐘重新執行一次(1秒=1000)
             setTimeout(Set_FourTitleText, 300000);

@@ -97,13 +97,13 @@
             </li>
 
             <li id="history" class="nav-item active">
-                <a class="nav-link" href="javascript:;">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-history"></i>
                     <span>歷史紀錄</span></a>
             </li>
 
             <li id="record_active" class="nav-item">
-                <a class="nav-link" href="javascript:;" onclick="getData2('record.html');">
+                <a class="nav-link" href="javascript:;" onclick="getData('record.html');">
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>生產履歷</span></a>
             </li>
@@ -230,7 +230,7 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="不給你搜尋..."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="搜尋..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-success" type="button">
@@ -255,7 +255,7 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="不給你搜尋..." aria-label="Search" aria-describedby="basic-addon2">
+                                            placeholder="搜尋..." aria-label="Search" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-success" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -302,7 +302,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div id='switch_content2' class="container-fluid">
+                <div id='switch_content' class="container-fluid">
 
                     <div class="row" id="form22">
                         <!--讓使用者調整搜尋條件重新搜尋-->
@@ -421,7 +421,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>&copy; VeryFarm 2021</span>
                     </div>
                 </div>
             </footer>
@@ -469,9 +469,11 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
+    <script src="record.js"></script>
     <!-- Page level custom scripts -->
     <!-- <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script> -->
@@ -483,7 +485,7 @@
 
 
     <!-- 其他 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>

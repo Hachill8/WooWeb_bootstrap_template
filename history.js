@@ -422,13 +422,13 @@ function submithistory() {/*重新查詢button按下後用新的href先重新載
 
 
 //以AJAX方式針對指定內容做更新，不用重整網頁
-function getData2(pagename) {
+function getData(pagename) {
     $.ajax({
         url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
         type: "GET", //請求方式
         success: function (data) {
             //替換html內容
-            $("#switch_content2").html(data);
+            $("#switch_content").html(data);
             
             //加入此html會用到的js檔
             var element = document.createElement('script');

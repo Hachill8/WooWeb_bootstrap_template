@@ -238,3 +238,4 @@ var table = $('#dtable').DataTable();
 $('#dtable').on('keyup', function () { //搜尋datatable內資料
     table.search(this.value).draw();
 });
+
