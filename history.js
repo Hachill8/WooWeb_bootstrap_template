@@ -67,6 +67,7 @@ function showContent() {
 var Slabels = [], STdata = [], SHdata = [], Wlabels = [], WTdata = [], WHdata = [], Olabels = [], OTdata = [], OHdata = [];/*棚內時間 棚內溫度 棚內濕度 氣象站時間 氣象站溫度 氣象站濕度 室外時間 室外溫度 室外濕度 */
 var maxlimit, hidetout = true, hidetin = true, hidet = true;/*最長時間間距 室外是否先隱藏 棚內是否先隱藏 氣象站是否先隱藏 */
 var arr1, arr2;/*arr1=url?前 arr2=url?後*/
+var sen = [];/*使用者選了那些感測器*/
 var lineChart, lineChart4;/*溫度 濕度 */
 var ctxT, ctxH;
 var storyId = window.location.href;/*現在頁面的url */
@@ -110,6 +111,9 @@ window.onload = function () {/*當此頁面載入時執行創建圖表 */
 				maintainAspectRatio: false,
 				bezierCurve: true,
 				scales: {
+					legend: {
+						display:false
+					},
 					xAxes: [{
 						ticks: {
 							autoSkip: true,
@@ -128,7 +132,7 @@ window.onload = function () {/*當此頁面載入時執行創建圖表 */
 					}]
 				}
 			}
-		})
+		})	
 	}, 2000);
 	setTimeout(function () {
 		ctxH = document.getElementById('lineChart4')
@@ -271,7 +275,6 @@ $(document).ready(function () {
 		arr1 = url.split('?');
 		arr2 = arr1[1].split('&');/*arr2[1]=感測器選取 arr2[2]=開始日期 arr2[3]=結束日期 arr[4]=裝置比較 arr[5]=棚架 */
 		var data = { 起始日期: arr2[2], 結束日期: arr2[3] };
-		var sen = [];
 		sen = arr2[1].split(',');
 		//var data = { 起始日期: '20210110', 結束日期: '20210111'};
 		$.ajax({/*用ajax連，指定type然後寫要連到的url，data放日期，回傳格式json，如果成功會到success，失敗會到error */
@@ -352,6 +355,8 @@ $(document).ready(function () {
 		if (arr2[4].indexOf('1') != -1) { hidet = false; }
 		if (arr2[4].indexOf('2') != -1) { hidetin = false; }
 		if (arr2[4].indexOf('3') != -1) { hidetout = false; }
+		if (sen.includes('temperature')==false) { $("#temp").hide(); }
+		if (sen.includes('humidity')==false) { $("#hum").hide(); }
 	}
 })
 
