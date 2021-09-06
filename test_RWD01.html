@@ -1,0 +1,100 @@
+<div class="row g-2" id="form22">
+
+    <div class="col-xxl-2">
+
+        <select id="sensorselect" class="form-select" multiple="multiple">
+            <option value="temperature">溫度</option>
+            <option value="humidity">濕度</option>
+        </select>
+
+    </div>
+    <div class="col-xxl-2">
+
+        <div class="datepicker date input-group" id="datepicker3">
+            <input type="text" class="form-control datepicker1" id="Date1" placeholder="開始日期" autocomplete="off">
+            <!--<span class="input-group-text"><span class="fas fa-calendar-alt"></span></span>
+                    <span class="input-group-text"><span class="fas fa-calendar-alt"></sapn></span>-->
+            <i class="fas fa-calendar-alt"></i>
+
+        </div>
+
+    </div>
+    <div class="col-xxl-2">
+        <div class="datepicker date input-group" id="datepicker4">
+            <input type="text" class="form-control datepicker2" id="Date2" placeholder="結束日期" autocomplete="off">
+            <!--<span class="input-group-text"><span class="fas fa-calendar-alt"></span></span>
+                    <span class="input-group-text"><span class="fas fa-calendar-alt"></sapn></span>-->
+            <i class="fas fa-calendar-alt"></i>
+        </div>
+    </div>
+    <div class="col-xxl-2">
+        <select id="environmentselect" class="form-select" multiple="multiple">
+            <option value="1">氣象站</option>
+            <option value="2">棚架內</option>
+            <option value="3">室外</option>
+        </select>
+
+    </div>
+    <div class="col-xxl-2">
+
+        <select id="scaffoldselect" class="form-select">
+            <option value="A1">A區1</option>
+            <option value="A2">A區2</option>
+            <option value="A3">A區3</option>
+            <option value="A4">A區4</option>
+            <option value="A5">A區5</option>
+        </select>
+
+
+    </div>
+    <div class="col-xxl-2 d-grid d-xxl-block">
+        <button onclick="submithistory();" class="btn btn-primary">重新查詢</button>
+    </div>
+
+</div>
+
+<div class="row py-3">
+
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">室外 | 棚架內 | 氣象站 溫度比較</h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row">
+
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">室外 | 棚架內 | 氣象站 濕度比較</h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="lineChart4"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

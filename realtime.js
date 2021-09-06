@@ -31,7 +31,7 @@ function record_active() {
 //以AJAX方式針對指定內容做更新，不用重整網頁
 function getData(pagename) {
     $.ajax({
-        url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
+        url: "http://134.208.97.191:8080/html/wooweb_bootstrap_template/" + pagename,	//上傳URL
         type: "GET", //請求方式
         success: function (data) {
             //替換html內容
@@ -42,7 +42,8 @@ function getData(pagename) {
             var src = pagename.split('.', 1) + '.js';
             element.src = src;
             document.body.appendChild(element);
-
+            
+            
         }, //請求成功
         error: function () {
             alert("AJAX換頁發生錯誤!");
@@ -79,7 +80,7 @@ function Set_cwbLatest24hours_ndhu_temperature() {
                 else{
                     Temperature_data.push(results[i].Temperature);
                     //另外建一個沒有存null值的max_min_Temperature陣列，用來設定Y軸的max和min(在yAxes的ticks裡)，
-                    //如果用Temperature_data來設定，假設Temperature_data=[25.3,26.1,null,24]
+                    //如果用Temperature_data來設定Y軸的max和min，假設Temperature_data=[25.3,26.1,null,24]
                     //當Math.min.apply在找最小值時，碰到null會回傳0，此時min:0，但真正最小值為24度，會導致折線圖下方的空隙很大
                     max_min_Temperature.push(results[i].Temperature);
                 }
@@ -132,7 +133,7 @@ function Set_cwbLatest24hours_ndhu_temperature() {
                     //★★★--labels放入"時間"陣列
                     labels: Latest24hours,
                     datasets: [{
-
+                        
                         label: "東華溫度",
                         yAxisID: "y-Temp",
                         //是否填充
@@ -368,4 +369,15 @@ function Set_FourTitleText() {
         });
 }
 
+// function onSignIn(googleUser) {
+    
+//     var profile = googleUser.getBasicProfile();
+//     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//     console.log('Name: ' + profile.getName());
+//     console.log('Image URL: ' + profile.getImageUrl());
+//     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+//     var id_token = googleUser.getAuthResponse().id_token;
+//     console.log('id_token: ' + id_token);
+//     // location.href = "http://localhost:5500/index.html";
+// }
 

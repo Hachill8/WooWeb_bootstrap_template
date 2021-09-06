@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    
     <!-- Logo圖片 -->
     <link rel="icon" type="image/png" href="img/greenhouse-effect.png" />
 
@@ -51,29 +51,6 @@
 
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-    <script>
-        //以AJAX方式針對指定內容做更新，不用重整網頁
-        function getData(pagename) {
-            $.ajax({
-                url: "http://134.208.97.191:8080/html/WooWeb_bootstrap_template/" + pagename,	//上傳URL
-                type: "GET", //請求方式
-                success: function (data) {
-                    //替換html內容
-                    $("#switch_content").html(data);
-
-                    //加入此html會用到的js檔
-                    // var element = document.createElement('script');
-                    // var src = pagename.split('.', 1) + '.js';
-                    // element.src = src;
-                    // document.body.appendChild(element);
-
-                }, //請求成功
-                error: function () {
-                    alert("AJAX換頁發生錯誤!");
-                },//表示如果請求響應出現錯誤，會執行的回調函數
-            });
-        }
-    </script>
 </head>
 
 <body id="page-top">
@@ -113,6 +90,22 @@
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>生產履歷</span></a>
             </li>
+
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            
+            <!-- <li id="record_active" class="nav-item">
+                <a class="nav-link" href="javascript:;" onclick="getTest('test_RWD01.html');">
+                    <i class="fas fa-fw fa-calendar-alt"></i>
+                    <span>排版測試</span></a>
+            </li> -->
 
 
             <!-- Divider -->
@@ -234,7 +227,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                    <!-- <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="搜尋..."
@@ -245,19 +238,19 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
+                        <!-- <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
-                            </a>
+                            </a> -->
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
@@ -271,7 +264,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </li>
+                        </li> -->
 
 
 
@@ -614,7 +607,7 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 
-    <script>
+    <!-- <script>
         //從手機開啟會直接跳到生產履歷頁面
         var useragent = navigator.userAgent;
         useragent = useragent.toLowerCase();
@@ -625,7 +618,8 @@
             //切換按鈕
             record_active();
         }
-    </script>
+    </script> -->
+    
 </body>
 
 
