@@ -172,25 +172,16 @@ main {
 	background: none;
 	color: #ddd;
 }
-.multiselect-option.active {
+.multiselect-option.dropdown-item.active,
+.multiselect-option.dropdown-item:active{
     color:#212529;
-    background: none;
-}
+    background-color: white;
+} 
 .form-check-label {
-    margin-top: 8px;
+    margin-top: 2px;
+	margin-left: 2px;
 }
-.datepicker-container {
-    width: 15%;
-}
-.sensorresearch {
-    width: 15%;
-}
-.environmentresearch {
-    width: 20%;
-}
-.researchbutton {
-    width: 15%;
-}
+
 
 
 

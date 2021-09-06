@@ -56,19 +56,6 @@
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 </head>
-<style>
-    .form-row {
-        width: 210vh;
-        height: 60px;
-        position: fixed;
-        margin-top: 65px;
-        padding-left: 15px;
-        background: var(--second-bg-color);
-        overflow: hidden;
-        z-index: 10;
-        transition: width .5s;
-    }
-</style>
 
 <body id="page-top">
 
@@ -307,63 +294,71 @@
                     <div class="row" id="form22">
                         <!--讓使用者調整搜尋條件重新搜尋-->
                         <!--感測器-->
-                        <div class="sensorresearch">
+                        <div class="col-xl-2 px-2 my-1 sensorresearch">
                             <select id="sensorselect" class="form-select" multiple="multiple">
                                 <option value="temperature">溫度</option>
                                 <option value="humidity">濕度</option>
                             </select>
                         </div>
-                        <!--開始日期-->
-                        <div class="datepicker-container " id="datepicker3">
-                            <div class="datepicker date input-group">
-                                <input type="text" class="form-control datepicker1" id="Date1" autocomplete="off">
-                                <!--<span class="input-group-text"><span class="fas fa-calendar-alt"></span></span>
-                                <span class="input-group-text"><span class="fas fa-calendar-alt"></sapn></span>-->
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                        </div>
-                        <span style="width:5px;margin-right:5px;margin-left:-5px;margin-top:10px;">~</span>
-                        <!--結束日期-->
-                        <div class="datepicker-container " id="datepicker4">
-                            <div class="datepicker date input-group">
-                                <input type="text" class="form-control datepicker2" id="Date2" autocomplete="off">
-                                <!--<span class="input-group-text">--><i class="fas fa-calendar-alt"></i>
-                                <!--</span>-->
+                        <div class="col-xl-4 px-0 my-1">
+                            <div class="row justify-content-center align-items-center">
+                                <!--開始日期-->
+                                <div class="col-5 px-1 datepicker-container " id="datepicker3">
+                                    <div class="datepicker date input-group">
+                                        <input type="text" class="form-control datepicker1" id="Date1" autocomplete="off" placeholder="開始日期">
+                                        <!--<span class="input-group-text"><span class="fas fa-calendar-alt"></span></span>
+                                        <span class="input-group-text"><span class="fas fa-calendar-alt"></sapn></span>-->
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                </div>
+                                <!--<span style="width:5px;margin-right:0px;margin-left:-8px;margin-top:10px;">~</span>-->
+                                <span class="col-1 px-0" style="text-align: center;">~</span>
+                                <!--結束日期-->
+                                <div class="col-5 px-1 datepicker-container " id="datepicker4">
+                                    <div class="datepicker date input-group">
+                                        <input type="text" class="form-control datepicker2" id="Date2" autocomplete="off" placeholder="結束日期">
+                                        <!--<span class="input-group-text">--><i class="fas fa-calendar-alt"></i>
+                                        <!--</span>-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!--裝置比較-->
-                        <div class="environmentresearch">
+                        <div class="col-xl-3 px-2 my-1 environmentresearch">
                             <select id="environmentselect" class="form-select" multiple="multiple">
                                 <option value="1">氣象站</option>
                                 <option value="2">棚架內</option>
                                 <option value="3">室外</option>
                             </select>
                         </div>
-                        <div class="sensorresearch">
-                            <select id="scaffoldselect" class="form-select">
-                                <option value="A1">A區1</option>
-                                <option value="A2">A區2</option>
-                                <option value="A3">A區3</option>
-                                <option value="A4">A區4</option>
-                                <option value="A5">A區5</option>
-                            </select>
+                        <div class="col-xl-3 px-2 my-1">
+                            <div class="row">
+                                <div class="col-12 col-xl-5 mb-1 pl-2 sensorresearch">
+                                    <select id="scaffoldselect" class="form-select">
+                                        <option value="A1">A區1</option>
+                                        <option value="A2">A區2</option>
+                                        <option value="A3">A區3</option>
+                                        <option value="A4">A區4</option>
+                                        <option value="A5">A區5</option>
+                                    </select>
+                                </div>
+                                <!--重新查詢Button-->
+                                <div class="col-6 col-xl-5 px-2 researchbutton">
+                                    <button onclick="submithistory();" class="btn btn-primary mb-2">重新查詢</button>
+                                </div>
+                            </div>
                         </div>
-                        <!--重新查詢Button-->
-                        <div class="researchbutton">
-                            <button onclick="submithistory();" class="btn btn-primary mb-2">重新查詢</button>
-                        </div>
+                        
                     </div>
+                        
                     <div class="row">
-
                         <!-- Area Chart -->
                         <div class="col-xl-12 col-lg-12">
                             </br>
                         </div>
-
-
                     </div>
 
-                    <div class="row">
+                    <div class="row" id="temp">
 
                         <!-- Area Chart -->
                         <div class="col-xl-12 col-lg-12">
@@ -382,11 +377,9 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
-                    <div class="row">
+                    <div class="row" id="hum">
 
                         <!-- Area Chart -->
                         <div class="col-xl-12 col-lg-12">
@@ -405,11 +398,7 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
 
                 </div>
                 <!-- /.container-fluid -->

@@ -90,13 +90,20 @@ function refresh() { //刷新表格
         } //成功取得回傳時的事件
     })
 }
+window.onload = function(){
+    
+    document.getElementById('exampleModalLabel').innerHTML = 'your tip has been submitted!';
+}
 
 $('#addrecordeModal').on('submit', '#saveRecordForm', function (event) { //新增資料
+    
     var date = $('#workdate').val();
     var area = $('#areanum').val();
     //var item = $("input[type='checkbox']").val();
     var content = $('#workcontent').val();
     var staff = $('#staff').val();
+    //$(this).find('.modal-title').text("You new title");
+    
     if (date != '' && area != '') //&& !$("#checkboxID").is(":checked")==false  
     {
         var i = [];
@@ -112,7 +119,7 @@ $('#addrecordeModal').on('submit', '#saveRecordForm', function (event) { //新�
         console.log("bad2");
         $.ajax({
             url: 'http://134.208.97.191:8080/sensor_WebService.asmx/Insert_Record',
-            data: { date: date, Area: area, 整地: i[0], 除草: i[1], 採收: i[2], 定植: i[3], 施肥: i[4], 其他: i[5], 播種: i[6], 病蟲害防治: i[7], text: content, Worker: staff },
+            data: { date: date, Area: area, 整地: i[0], 除草: i[1], 採收: i[2], 定植: i[3], 施肥: i[4], 其他: i[5], 播種: i[6], 病蟲害防治: i[7], text: content, Worker: staff },//function 變數:var
             type: 'post',
             success: function (data) {
                 console.log(data);
