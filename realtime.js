@@ -22,11 +22,11 @@ $("#record_active").on("click", function () {
 });
 
 //當用手機版開啟時會從即時資料頁跳到生產履歷頁，因此按鈕也要做切換
-function record_active() {
-    $("#realtime_active").removeClass("active");
-    $("#history").removeClass("active");
-    $("#record_active").addClass("active");
-}
+// function record_active() {
+//     $("#realtime_active").removeClass("active");
+//     $("#history").removeClass("active");
+//     $("#record_active").addClass("active");
+// }
 
 //以AJAX方式針對指定內容做更新，不用重整網頁
 function getData(pagename) {
@@ -369,15 +369,4 @@ function Set_FourTitleText() {
         });
 }
 
-// function onSignIn(googleUser) {
-    
-//     var profile = googleUser.getBasicProfile();
-//     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//     console.log('Name: ' + profile.getName());
-//     console.log('Image URL: ' + profile.getImageUrl());
-//     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-//     var id_token = googleUser.getAuthResponse().id_token;
-//     console.log('id_token: ' + id_token);
-//     // location.href = "http://localhost:5500/index.html";
-// }
 
